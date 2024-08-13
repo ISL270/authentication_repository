@@ -271,6 +271,8 @@ class AuthenticationRepository {
       throw LogOutFailure();
     }
   }
+
+  bool get isAuthenticated => user.last != User.empty;
 }
 
 extension on firebase_auth.User {
