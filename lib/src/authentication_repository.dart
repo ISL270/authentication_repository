@@ -272,7 +272,7 @@ class AuthenticationRepository {
     }
   }
 
-  bool get isAuthenticated => user.last != User.empty;
+  bool get isAuthenticated => currentUser != User.empty;
 }
 
 extension on firebase_auth.User {
