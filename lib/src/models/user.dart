@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-
 /// {@template user}
 /// User model
 ///
