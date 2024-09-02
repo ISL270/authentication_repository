@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:authentication_repository/src/cache.dart';
-import 'package:authentication_repository/src/models/exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -269,7 +268,7 @@ void main() {
 
     group('user', () {
       test('emits User.empty when firebase user is null', () async {
-        when(() => firebaseAuth.authStateChanges()).thenAnswer((_) => Stream.value(null));
+        when(() => firebaseAuth.userChanges()).thenAnswer((_) => Stream.value(null));
         await expectLater(
           authenticationRepository.user,
           emitsInOrder(const <User>[User.empty]),
@@ -281,7 +280,7 @@ void main() {
         when(() => firebaseUser.uid).thenReturn(_mockFirebaseUserUid);
         when(() => firebaseUser.email).thenReturn(_mockFirebaseUserEmail);
         when(() => firebaseUser.photoURL).thenReturn(null);
-        when(() => firebaseAuth.authStateChanges()).thenAnswer((_) => Stream.value(firebaseUser));
+        when(() => firebaseAuth.userChanges()).thenAnswer((_) => Stream.value(firebaseUser));
         await expectLater(
           authenticationRepository.user,
           emitsInOrder(const <User>[user]),
